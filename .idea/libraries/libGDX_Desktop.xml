@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="libGDX Desktop">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AnimalFlip-desktop/libs/gdx-backend-lwjgl-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AnimalFlip-desktop/libs/gdx-backend-lwjgl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AnimalFlip-desktop/libs/gdx-backend-lwjgl-natives.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AnimalFlip-desktop/libs/gdx-natives.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

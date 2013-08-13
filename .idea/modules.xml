@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AnimalFlip/AnimalFlip.iml" filepath="$PROJECT_DIR$/AnimalFlip/AnimalFlip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AnimalFlip-android/AnimalFlip-android.iml" filepath="$PROJECT_DIR$/AnimalFlip-android/AnimalFlip-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AnimalFlip-desktop/AnimalFlip-desktop.iml" filepath="$PROJECT_DIR$/AnimalFlip-desktop/AnimalFlip-desktop.iml" />
+    </modules>
+  </component>
+</project>
+
