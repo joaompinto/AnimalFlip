@@ -1,0 +1,68 @@
+
+animals.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+cow
+  rotate: false
+  xy: 1, 107
+  size: 182, 145
+  orig: 182, 145
+  offset: 0, 0
+  index: -1
+monkey
+  rotate: false
+  xy: 185, 137
+  size: 170, 115
+  orig: 170, 115
+  offset: 0, 0
+  index: -1
+mouse
+  rotate: false
+  xy: 357, 139
+  size: 143, 113
+  orig: 143, 113
+  offset: 0, 0
+  index: -1
+dragon
+  rotate: false
+  xy: 502, 129
+  size: 138, 123
+  orig: 138, 123
+  offset: 0, 0
+  index: -1
+bunny
+  rotate: false
+  xy: 642, 99
+  size: 137, 153
+  orig: 137, 153
+  offset: 0, 0
+  index: -1
+dog
+  rotate: false
+  xy: 781, 126
+  size: 137, 126
+  orig: 137, 126
+  offset: 0, 0
+  index: -1
+bear
+  rotate: false
+  xy: 1, 1
+  size: 137, 104
+  orig: 137, 104
+  offset: 0, 0
+  index: -1
+cat
+  rotate: false
+  xy: 185, 24
+  size: 137, 111
+  orig: 137, 111
+  offset: 0, 0
+  index: -1
+pig
+  rotate: false
+  xy: 781, 10
+  size: 137, 114
+  orig: 137, 114
+  offset: 0, 0
+  index: -1
