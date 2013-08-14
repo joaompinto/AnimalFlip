@@ -71,7 +71,7 @@
 	    <fileset dir="${animalflip-desktop.output.dir}"/>
         <fileset dir="${module.animalflip-android.basedir}/assets" />
       </jar>
-      <copy todir="${animalflip-desktop.output.dir}/../../AnimalFlip">
+      <copy todir="${animalflip-desktop.output.dir}/../../desktop">
           <fileset file="${module.animalflip.basedir}/libs/gdx.jar" />
           <fileset file="${module.animalflip-desktop.basedir}/libs/gdx-natives.jar" />
           <fileset file="${module.animalflip-desktop.basedir}/libs/gdx-backend-lwjgl.jar" />

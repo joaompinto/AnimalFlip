@@ -16,10 +16,20 @@ public class Assets {
     public static void load () {
 
         animal_textures = new Array<Texture>();
+        String[] animal_list = {"monkey.png"
+            , "dragon.png"
+            , "mouse.png"
+            , "pig.png"
+            , "dog.png"
+            , "bunny.png"
+            , "cow.png"
+            , "cat.png"
+            , "bear.png"
+        };
 
-        FileHandle dirHandle = Gdx.files.internal("data/animals");
-        for (FileHandle entry: dirHandle.list()) {
-            Texture texture = new Texture(entry);
+        for (String animal_name: animal_list) {
+            FileHandle fileHandle = Gdx.files.internal("data/animals/"+animal_name);
+            Texture texture = new Texture(fileHandle);
             animal_textures.add(texture);
         }
     }
