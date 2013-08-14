@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_animalflip" default="compile.module.animalflip">
+  <dirname property="module.animalflip.basedir" file="${ant.file.module_animalflip}"/>
+  
+  <property name="module.jdk.home.animalflip" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.animalflip" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.animalflip" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.animalflip" value="${compiler.args}"/>
+  
+  <property name="animalflip.output.dir" value="${module.animalflip.basedir}/../out/production/AnimalFlip"/>
+  <property name="animalflip.testoutput.dir" value="${module.animalflip.basedir}/../out/test/AnimalFlip"/>
+  
+  <path id="animalflip.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="animalflip.module.production.classpath">
+    <path refid="${module.jdk.classpath.animalflip}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip.runtime.production.module.classpath">
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip.module.classpath">
+    <path refid="${module.jdk.classpath.animalflip}"/>
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip.runtime.module.classpath">
+    <pathelement location="${animalflip.testoutput.dir}"/>
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.animalflip">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.animalflip">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.animalflip"/>
+  </patternset>
+  
+  <path id="animalflip.module.sourcepath">
+    <dirset dir="${module.animalflip.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.animalflip" depends="compile.module.animalflip.production,compile.module.animalflip.tests" description="Compile module AnimalFlip"/>
+  
+  <target name="compile.module.animalflip.production" description="Compile module AnimalFlip; production classes">
+    <mkdir dir="${animalflip.output.dir}"/>
+    <javac destdir="${animalflip.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.animalflip}/javac">
+      <compilerarg line="${compiler.args.animalflip}"/>
+      <bootclasspath refid="animalflip.module.bootclasspath"/>
+      <classpath refid="animalflip.module.production.classpath"/>
+      <src refid="animalflip.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.animalflip"/>
+    </javac>
+    
+    <copy todir="${animalflip.output.dir}">
+      <fileset dir="${module.animalflip.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.animalflip"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.animalflip.tests" depends="compile.module.animalflip.production" description="compile module AnimalFlip; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.animalflip" description="cleanup module">
+    <delete dir="${animalflip.output.dir}"/>
+    <delete dir="${animalflip.testoutput.dir}"/>
+  </target>
+</project>

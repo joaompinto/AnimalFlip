@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_animalflip-desktop" default="compile.module.animalflip-desktop">
+  <dirname property="module.animalflip-desktop.basedir" file="${ant.file.module_animalflip-desktop}"/>
+  
+  <property name="module.jdk.home.animalflip-desktop" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.animalflip-desktop" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.animalflip-desktop" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.animalflip-desktop" value="${compiler.args}"/>
+  
+  <property name="animalflip-desktop.output.dir" value="${module.animalflip-desktop.basedir}/../out/production/AnimalFlip-desktop"/>
+  <property name="animalflip-desktop.testoutput.dir" value="${module.animalflip-desktop.basedir}/../out/test/AnimalFlip-desktop"/>
+  
+  <path id="animalflip-desktop.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="animalflip-desktop.module.production.classpath">
+    <path refid="${module.jdk.classpath.animalflip-desktop}"/>
+    <path refid="library.libgdx_desktop.classpath"/>
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip-desktop.runtime.production.module.classpath">
+    <pathelement location="${animalflip-desktop.output.dir}"/>
+    <path refid="library.libgdx_desktop.classpath"/>
+    <path refid="animalflip.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="animalflip-desktop.module.classpath">
+    <path refid="${module.jdk.classpath.animalflip-desktop}"/>
+    <pathelement location="${animalflip-desktop.output.dir}"/>
+    <path refid="library.libgdx_desktop.classpath"/>
+    <pathelement location="${animalflip.testoutput.dir}"/>
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip-desktop.runtime.module.classpath">
+    <pathelement location="${animalflip-desktop.testoutput.dir}"/>
+    <pathelement location="${animalflip-desktop.output.dir}"/>
+    <path refid="library.libgdx_desktop.classpath"/>
+    <path refid="animalflip.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.animalflip-desktop">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.animalflip-desktop">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.animalflip-desktop"/>
+  </patternset>
+  
+  <path id="animalflip-desktop.module.sourcepath">
+    <dirset dir="${module.animalflip-desktop.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+   <target name="zip" depends="compile.module.animalflip-desktop.production,compile.module.animalflip-desktop.tests">
+      <mkdir dir="${animalflip-desktop.output.dir}/../../desktop"/>
+      <jar destfile="${animalflip-desktop.output.dir}/../../desktop/AnimalFlip.jar" basedir="${animalflip.output.dir}">
+        <manifest>
+            <attribute name="Main-Class" value="org.osgameseed.games.animalflip.Main"/>
+            <attribute name="Class-Path" value="gdx-backend-lwjgl.jar gdx-backend-lwjgl-natives.jar gdx.jar gdx-natives.jar"/>
+        </manifest>
+	    <fileset dir="${animalflip-desktop.output.dir}"/>
+        <fileset dir="${module.animalflip-android.basedir}/assets" />
+      </jar>
+      <copy todir="${animalflip-desktop.output.dir}/../../AnimalFlip">
+          <fileset file="${module.animalflip.basedir}/libs/gdx.jar" />
+          <fileset file="${module.animalflip-desktop.basedir}/libs/gdx-natives.jar" />
+          <fileset file="${module.animalflip-desktop.basedir}/libs/gdx-backend-lwjgl.jar" />
+          <fileset file="${module.animalflip-desktop.basedir}/libs/gdx-backend-lwjgl-natives.jar" />
+          <fileset file="${module.animalflip-desktop.basedir}/bin/animalflip.sh" />
+      </copy>
+      <chmod file="${animalflip-desktop.output.dir}/../../desktop/animalflip.sh" perm="755"/>
+      <zip destfile="${animalflip-desktop.output.dir}/../../AnimalFlip.zip"
+          basedir="${animalflip-desktop.output.dir}/../../desktop"
+      />
+   </target>
+
+  <target name="compile.module.animalflip-desktop" depends="compile.module.animalflip-desktop.production,compile.module.animalflip-desktop.tests" description="Compile module AnimalFlip-desktop"/>
+  
+  <target name="compile.module.animalflip-desktop.production" depends="compile.module.animalflip" description="Compile module AnimalFlip-desktop; production classes">
+    <mkdir dir="${animalflip-desktop.output.dir}"/>
+    <javac destdir="${animalflip-desktop.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.animalflip-desktop}/javac">
+      <compilerarg line="${compiler.args.animalflip-desktop}"/>
+      <bootclasspath refid="animalflip-desktop.module.bootclasspath"/>
+      <classpath refid="animalflip-desktop.module.production.classpath"/>
+      <src refid="animalflip-desktop.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.animalflip-desktop"/>
+    </javac>
+    
+    <copy todir="${animalflip-desktop.output.dir}">
+      <fileset dir="${module.animalflip-desktop.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.animalflip-desktop"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.animalflip-desktop.tests" depends="compile.module.animalflip-desktop.production" description="compile module AnimalFlip-desktop; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.animalflip-desktop" description="cleanup module">
+    <delete dir="${animalflip-desktop.output.dir}"/>
+    <delete dir="${animalflip-desktop.testoutput.dir}"/>
+    <delete dir="${animalflip-desktop.output.dir}/../../desktop"/>
+  </target>
+</project>

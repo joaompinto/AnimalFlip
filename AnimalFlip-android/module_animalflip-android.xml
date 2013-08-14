@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_animalflip-android" default="compile.module.animalflip-android">
+  <dirname property="module.animalflip-android.basedir" file="${ant.file.module_animalflip-android}"/>
+  
+  <property name="module.jdk.home.animalflip-android" value="${jdk.home.android_4.2.2_platform}"/>
+  <property name="module.jdk.bin.animalflip-android" value="${jdk.bin.android_4.2.2_platform}"/>
+  <property name="module.jdk.classpath.animalflip-android" value="jdk.classpath.android_4.2.2_platform"/>
+  
+  <property name="compiler.args.animalflip-android" value="${compiler.args}"/>
+  
+  <property name="animalflip-android.output.dir" value="${module.animalflip-android.basedir}/../out/production/AnimalFlip-android"/>
+  <property name="animalflip-android.testoutput.dir" value="${module.animalflip-android.basedir}/../out/test/AnimalFlip-android"/>
+  
+  <path id="animalflip-android.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="animalflip-android.module.production.classpath">
+    <path refid="${module.jdk.classpath.animalflip-android}"/>
+    <path refid="library.libgdx_android.classpath"/>
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip-android.runtime.production.module.classpath">
+    <pathelement location="${animalflip-android.output.dir}"/>
+    <path refid="library.libgdx_android.classpath"/>
+    <path refid="animalflip.runtime.production.module.classpath"/>
+  </path>
+  
+  <path id="animalflip-android.module.classpath">
+    <path refid="${module.jdk.classpath.animalflip-android}"/>
+    <pathelement location="${animalflip-android.output.dir}"/>
+    <path refid="library.libgdx_android.classpath"/>
+    <pathelement location="${animalflip.testoutput.dir}"/>
+    <pathelement location="${animalflip.output.dir}"/>
+    <path refid="library.libgdx_shared.classpath"/>
+  </path>
+  
+  <path id="animalflip-android.runtime.module.classpath">
+    <pathelement location="${animalflip-android.testoutput.dir}"/>
+    <pathelement location="${animalflip-android.output.dir}"/>
+    <path refid="library.libgdx_android.classpath"/>
+    <path refid="animalflip.runtime.module.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.animalflip-android">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.animalflip-android">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.animalflip-android"/>
+  </patternset>
+  
+  <path id="animalflip-android.module.sourcepath">
+    <dirset dir="${module.animalflip-android.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.animalflip-android" depends="compile.module.animalflip-android.production,compile.module.animalflip-android.tests" description="Compile module AnimalFlip-android"/>
+  
+  <target name="compile.module.animalflip-android.production" depends="compile.module.animalflip" description="Compile module AnimalFlip-android; production classes">
+    <mkdir dir="${animalflip-android.output.dir}"/>
+    <javac destdir="${animalflip-android.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.animalflip-android}/javac">
+      <compilerarg line="${compiler.args.animalflip-android}"/>
+      <bootclasspath refid="animalflip-android.module.bootclasspath"/>
+      <classpath refid="animalflip-android.module.production.classpath"/>
+      <src refid="animalflip-android.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.animalflip-android"/>
+    </javac>
+    
+    <copy todir="${animalflip-android.output.dir}">
+      <fileset dir="${module.animalflip-android.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.animalflip-android"/>
+      </fileset>
+      <fileset dir="${module.animalflip-android.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.animalflip-android"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.animalflip-android.tests" depends="compile.module.animalflip-android.production" description="compile module AnimalFlip-android; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.animalflip-android" description="cleanup module">
+    <delete dir="${animalflip-android.output.dir}"/>
+    <delete dir="${animalflip-android.testoutput.dir}"/>
+  </target>
+</project>
