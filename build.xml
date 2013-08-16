@@ -59,27 +59,6 @@
     <exclude name="**/?*.clj"/>
   </patternset>
   
-  <!-- JDK definitions -->
-  
-  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
-  <path id="jdk.classpath.1.6">
-    <fileset dir="${jdk.home.1.6}">
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-    </fileset>
-  </path>
-  
   <property name="jdk.bin.android_4.2.2_platform" value="${jdk.home.android_4.2.2_platform}/../../../../usr/lib/jvm/java-6-sun-1.6.0.26/bin"/>
   <path id="jdk.classpath.android_4.2.2_platform">
     <fileset dir="${jdk.home.android_4.2.2_platform}">
@@ -88,11 +67,6 @@
       <include name="tools/support/annotations.jar"/>
     </fileset>
   </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
-  
   
   <!-- Project Libraries -->
   
@@ -112,6 +86,10 @@
     <pathelement location="${basedir}/AnimalFlip/libs/gdx-sources.jar"/>
     <pathelement location="${basedir}/AnimalFlip/libs/gdx.jar"/>
   </path>
+
+  <presetdef name="javac">
+    <javac includeantruntime="false" />
+  </presetdef>
   
   <!-- Modules -->
   
@@ -127,7 +105,7 @@
   
   <target name="clean" depends="clean.module.animalflip, clean.module.animalflip-android, clean.module.animalflip-desktop" description="cleanup all"/>
   
-  <target name="build.modules" depends="init, clean, compile.module.animalflip, compile.module.animalflip-android, compile.module.animalflip-desktop" description="build all modules"/>
+  <target name="build.modules" depends="init, clean, compile.module.animalflip, compile.module.animalflip-desktop" description="build all modules"/>
   
   <target name="all" depends="build.modules" description="build all"/>
 </project>

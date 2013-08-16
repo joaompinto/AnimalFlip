@@ -2,10 +2,6 @@
 <project name="module_animalflip" default="compile.module.animalflip">
   <dirname property="module.animalflip.basedir" file="${ant.file.module_animalflip}"/>
   
-  <property name="module.jdk.home.animalflip" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.animalflip" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.animalflip" value="${project.jdk.classpath}"/>
-  
   <property name="compiler.args.animalflip" value="${compiler.args}"/>
   
   <property name="animalflip.output.dir" value="${module.animalflip.basedir}/../out/production/AnimalFlip"/>
@@ -16,7 +12,6 @@
   </path>
   
   <path id="animalflip.module.production.classpath">
-    <path refid="${module.jdk.classpath.animalflip}"/>
     <path refid="library.libgdx_shared.classpath"/>
   </path>
   
@@ -26,7 +21,6 @@
   </path>
   
   <path id="animalflip.module.classpath">
-    <path refid="${module.jdk.classpath.animalflip}"/>
     <pathelement location="${animalflip.output.dir}"/>
     <path refid="library.libgdx_shared.classpath"/>
   </path>
@@ -58,7 +52,7 @@
   
   <target name="compile.module.animalflip.production" description="Compile module AnimalFlip; production classes">
     <mkdir dir="${animalflip.output.dir}"/>
-    <javac destdir="${animalflip.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.animalflip}/javac">
+    <javac destdir="${animalflip.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.animalflip}"/>
       <bootclasspath refid="animalflip.module.bootclasspath"/>
       <classpath refid="animalflip.module.production.classpath"/>
