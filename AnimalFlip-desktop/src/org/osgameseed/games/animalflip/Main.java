@@ -14,9 +14,9 @@ public class Main {
 		cfg.useGL20 = false;
 		cfg.width = 800;
 		cfg.height = 600;
-        cfg.addIcon("data/ic_launcher.png", Files.FileType.Internal);
-        cfg.addIcon("data/ic_launcher.png", Files.FileType.Internal);
-        cfg.addIcon("data/ic_launcher.png", Files.FileType.Internal);
+        cfg.addIcon("data/ic_launcher_16.png", Files.FileType.Internal);
+        cfg.addIcon("data/ic_launcher_32.png", Files.FileType.Internal);
+        cfg.addIcon("data/ic_launcher_128.png", Files.FileType.Internal);
 
         new LwjglApplication(new AnimalFlipGame(), cfg);
 	}
